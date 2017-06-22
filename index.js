@@ -1,5 +1,3 @@
-
-
 class Suggestor {
 
   constructor (opts = {}) {
@@ -14,6 +12,21 @@ class Suggestor {
     this.query = this.blockTracker._query
     this.recentPriceAverages = []
     this.firstPriceQuery = this.fetchFirstGasPrice()
+    this.trackBlocks()
+  }
+
+  trackBlocks() {
+    this.blockTracker.on('block', block => this.processBlock(block))
+  }
+
+  processBlock (newBlock) {
+    if (newBlock.transactions.length === 0) {
+      return
+    }
+    const gasUsed = parseInt(newBlock.gasUsed)
+    const newAverage = gasUsed / newBlock.transactions.length
+    this.recentPriceAverages.push(newAverage)
+    this.recentPriceAverages.shift()
   }
 
   fetchFirstGasPrice() {
