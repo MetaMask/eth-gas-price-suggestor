@@ -8,7 +8,7 @@ A module for getting the current average gas price of ethereum transactions.
 
 ## Example Usage
 
-```
+```javascript
 const Eth = require('ethjs');
 const provider = new Eth.HttpProvider('https://mainnet.infura.io');
 const BlockTracker = require('eth-block-tracker')
