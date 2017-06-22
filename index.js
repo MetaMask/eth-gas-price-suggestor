@@ -20,7 +20,9 @@ class Suggestor {
   }
 
   processBlock (newBlock) {
+    console.log('processing block')
     if (newBlock.transactions.length === 0) {
+      console.log('no transactions.')
       return
     }
     const gasUsed = parseInt(newBlock.gasUsed)
@@ -56,6 +58,7 @@ class Suggestor {
       return this.firstPriceQuery
     }
 
+    console.dir(this.recentPriceAverages)
     const sum = this.recentPriceAverages.reduce((result, value) => {
       return result + value
     }, 0)
