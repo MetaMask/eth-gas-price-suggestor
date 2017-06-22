@@ -1,0 +1,30 @@
+{
+  "name": "eth-gas-price-suggestor",
+  "version": "1.0.0",
+  "description": "A module for suggesting a reasonable successful ethereum gas price.",
+  "main": "index.js",
+  "scripts": {
+    "test": "node test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/flyswatter/eth-gas-price-suggestor.git"
+  },
+  "keywords": [
+    "ethereum",
+    "gas",
+    "price"
+  ],
+  "author": "Dan Finlay <dan@danfinlay.com>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/flyswatter/eth-gas-price-suggestor/issues"
+  },
+  "homepage": "https://github.com/flyswatter/eth-gas-price-suggestor#readme",
+  "devDependencies": {
+    "eth-block-tracker": "^2.0.1",
+    "ethereumjs-testrpc": "^3.0.5",
+    "ethjs-query": "^0.2.6",
+    "tape": "^4.6.3"
+  }
+}
