@@ -1,3 +1,6 @@
+const BN = require('bn.js')
+const Eth = require('ethjs');
+
 class Suggestor {
 
   constructor (opts = {}) {
@@ -20,15 +23,22 @@ class Suggestor {
   }
 
   processBlock (newBlock) {
-    console.log('processing block')
     if (newBlock.transactions.length === 0) {
-      console.log('no transactions.')
       return
     }
-    const gasUsed = parseInt(newBlock.gasUsed)
-    const newAverage = gasUsed / newBlock.transactions.length
-    this.recentPriceAverages.push(newAverage)
-    this.recentPriceAverages.shift()
+
+    const gasPriceSum = newBlock.transactions
+    .map(tx => Eth.toBN(tx.gasPrice))
+    .reduce((result, gasPrice) => {
+      return result.add(gasPrice)
+    }, new BN(0))
+
+    const average = gasPriceSum.divn(newBlock.transactions.length)
+    this.recentPriceAverages.push(average.toNumber())
+
+    if (this.recentPriceAverages.length > this.historyLength) {
+      this.recentPriceAverages.shift()
+    }
   }
 
   fetchFirstGasPrice() {
@@ -48,9 +58,7 @@ class Suggestor {
   }
 
   fillHistoryWith (value) {
-    for (let i = 0; i < this.historyLength; i++) {
-      this.recentPriceAverages.push(value)
-    }
+    this.recentPriceAverages.push(value)
   }
 
   async currentAverage() {
@@ -58,7 +66,6 @@ class Suggestor {
       return this.firstPriceQuery
     }
 
-    console.dir(this.recentPriceAverages)
     const sum = this.recentPriceAverages.reduce((result, value) => {
       return result + value
     }, 0)
@@ -69,3 +76,4 @@ class Suggestor {
 }
 
 module.exports = Suggestor
+

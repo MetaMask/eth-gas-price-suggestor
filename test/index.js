@@ -11,7 +11,7 @@ const Suggestor = require('../')
 test('should initialize and advise current eth_gasPrice', async function (t) {
   const provider = TestRPC.provider({ locked: false })
   const blockTracker = new BlockTracker({ provider })
-  blockTracker.start()
+  blockTracker.start({ fromBlock: '0x00' })
   const suggestor = new Suggestor({ blockTracker })
   let suggested
   try {
@@ -37,11 +37,11 @@ test('should increase with a new tx added', async function (t) {
     const account = accounts[0]
 
     blockTracker = new BlockTracker({ provider })
-    blockTracker.start()
+    blockTracker.start({ fromBlock: '0x00' })
     const historyLength = 2
     const suggestor = new Suggestor({ blockTracker, historyLength })
 
-    const txHash = await eth.sendTransaction({
+    let txHash = await eth.sendTransaction({
       from: account,
       to: account,
       value: '1',
