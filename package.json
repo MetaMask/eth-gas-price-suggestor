@@ -1,6 +1,6 @@
 {
   "name": "eth-gas-price-suggestor",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A module for suggesting a reasonable successful ethereum gas price.",
   "main": "index.js",
   "scripts": {
