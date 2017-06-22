@@ -40,7 +40,6 @@ class Suggestor {
 
   async currentAverage() {
     if (this.recentPriceAverages.length === 0) {
-      this.firstPriceQuery
       return this.firstPriceQuery
     }
 
