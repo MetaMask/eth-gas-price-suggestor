@@ -5,12 +5,19 @@ const BlockTracker = require('eth-block-tracker')
 
 const Suggestor = require('../')
 
-test('should initialize and advise current eth_gasPrice', t => {
+test('should initialize and advise current eth_gasPrice', async function (t) {
   const provider = TestRPC.provider({ locked: false })
   const blockTracker = new BlockTracker({ provider })
   const suggestor = new Suggestor({ blockTracker })
-  const suggested = await suggestor.currentAverage()
+  let suggested
+  try {
+    suggested = await suggestor.currentAverage()
+  } catch (e) {
+    t.error(e, 'should not fail')
+  }
   t.equal(suggested, 20000000000, 'Default testrpc gas price.')
+
+  t.end()
 })
 
 /*
