@@ -34,7 +34,7 @@ class Suggestor {
     }, new BN(0))
 
     const average = gasPriceSum.divn(newBlock.transactions.length)
-    this.recentPriceAverages.push(average.toNumber())
+    this.recentPriceAverages.push(Math.round(average.toNumber()))
 
     if (this.recentPriceAverages.length > this.historyLength) {
       this.recentPriceAverages.shift()
