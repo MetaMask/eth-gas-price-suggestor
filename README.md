@@ -1,5 +1,7 @@
 # Eth Gas Price Suggestor
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/MetaMask/eth-gas-price-suggestor.svg)](https://greenkeeper.io/)
+
 A module for getting the current average gas price of ethereum transactions.
 
 ## Installation
