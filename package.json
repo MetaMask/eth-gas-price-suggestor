@@ -23,7 +23,7 @@
   "homepage": "https://github.com/flyswatter/eth-gas-price-suggestor#readme",
   "devDependencies": {
     "eth-block-tracker": "^2.0.1",
-    "ethereumjs-testrpc": "^3.0.5",
+    "ethereumjs-testrpc": "^4.0.1",
     "ethjs-query": "^0.2.6",
     "tape": "^4.6.3"
   },
